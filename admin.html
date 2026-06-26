@@ -399,6 +399,7 @@
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2rem;
     }
+
     .mempelai-col-card {
       background: rgba(0, 0, 0, 0.015);
       border: 1px solid rgba(0, 0, 0, 0.05);
@@ -408,6 +409,7 @@
       flex-direction: column;
       gap: 1.2rem;
     }
+
     .mempelai-col-title {
       font-family: var(--font-heading);
       font-size: 1.25rem;
@@ -519,10 +521,14 @@
             </div>
             <div class="form-group">
               <label>Foto Profil</label>
-              <div style="display: flex; gap: 15px; align-items: center; background: rgba(0,0,0,0.02); padding: 0.8rem; border-radius: 8px; border: 1px dashed rgba(0,0,0,0.15);">
-                <img id="bride-photo-preview" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary-color); background: white;">
+              <div
+                style="display: flex; gap: 15px; align-items: center; background: rgba(0,0,0,0.02); padding: 0.8rem; border-radius: 8px; border: 1px dashed rgba(0,0,0,0.15);">
+                <img id="bride-photo-preview"
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150"
+                  style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary-color); background: white;">
                 <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
-                  <input type="file" id="bride-photo-input" accept="image/*" onchange="handlePhotoUpload(this, 'bride')" style="font-size: 0.85rem; padding: 0.2rem; border: none; background: transparent; width: 100%;">
+                  <input type="file" id="bride-photo-input" accept="image/*" onchange="handlePhotoUpload(this, 'bride')"
+                    style="font-size: 0.85rem; padding: 0.2rem; border: none; background: transparent; width: 100%;">
                   <span style="font-size: 0.75rem; color: var(--text-muted);">Format JPG/PNG (Maks 1MB)</span>
                 </div>
               </div>
@@ -546,10 +552,14 @@
             </div>
             <div class="form-group">
               <label>Foto Profil</label>
-              <div style="display: flex; gap: 15px; align-items: center; background: rgba(0,0,0,0.02); padding: 0.8rem; border-radius: 8px; border: 1px dashed rgba(0,0,0,0.15);">
-                <img id="groom-photo-preview" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary-color); background: white;">
+              <div
+                style="display: flex; gap: 15px; align-items: center; background: rgba(0,0,0,0.02); padding: 0.8rem; border-radius: 8px; border: 1px dashed rgba(0,0,0,0.15);">
+                <img id="groom-photo-preview"
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150"
+                  style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary-color); background: white;">
                 <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
-                  <input type="file" id="groom-photo-input" accept="image/*" onchange="handlePhotoUpload(this, 'groom')" style="font-size: 0.85rem; padding: 0.2rem; border: none; background: transparent; width: 100%;">
+                  <input type="file" id="groom-photo-input" accept="image/*" onchange="handlePhotoUpload(this, 'groom')"
+                    style="font-size: 0.85rem; padding: 0.2rem; border: none; background: transparent; width: 100%;">
                   <span style="font-size: 0.75rem; color: var(--text-muted);">Format JPG/PNG (Maks 1MB)</span>
                 </div>
               </div>
