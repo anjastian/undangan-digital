@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin Undangan Digital</title>
+  
+  <!-- Font Premium Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  
+  <!-- Icon FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* -------------------------------------------------------------
+       CSS DESIGN SYSTEM: VARIABLES & RESET
+       ------------------------------------------------------------- */
+    :root {
+      --bg-primary: #f8f6f0;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --primary-color: #2c4a3e; /* Forest Green elegant */
+      --secondary-color: #d4af37; /* Luxury Gold */
+      --text-dark: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-primary);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(44, 74, 62, 0.05) 0%, transparent 40%);
+    }
+
+    /* -------------------------------------------------------------
+       LAYOUT STRUCTURE & NAVBAR
+       ------------------------------------------------------------- */
+    header {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-container i {
+      color: var(--secondary-color);
+      font-size: 1.8rem;
+    }
+
+    .logo-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--primary-color);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      border-radius: 8px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      color: var(--primary-color);
+      background: rgba(44, 74, 62, 0.08);
+    }
+
+    .tab-btn.active {
+      font-weight: 600;
+      border-bottom: 2px solid var(--secondary-color);
+      border-radius: 8px 8px 0 0;
+    }
+
+    /* -------------------------------------------------------------
+       MAIN CONTAINER & VIEWS
+       ------------------------------------------------------------- */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .view-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .view-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* -------------------------------------------------------------
+       CARDS & FORMS STYLING
+       ------------------------------------------------------------- */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    input, select, textarea {
+      padding: 0.8rem 1rem;
+      border: 1.5px solid rgba(44, 74, 62, 0.15);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(44, 74, 62, 0.1);
+    }
+
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #1b2e27;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(44, 74, 62, 0.2);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #c49f2b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background: rgba(44, 74, 62, 0.05);
+    }
+
+    /* -------------------------------------------------------------
+       TABLES STYLING
+       ------------------------------------------------------------- */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    th {
+      background-color: rgba(44, 74, 62, 0.05);
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: rgba(0,0,0,0.01);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-success { background: rgba(46, 204, 113, 0.15); color: #27ae60; }
+    .badge-warning { background: rgba(241, 196, 15, 0.15); color: #d35400; }
+    .badge-info { background: rgba(52, 152, 219, 0.15); color: #2980b9; }
+
+    /* -------------------------------------------------------------
+       DASHBOARD METRICS CARDS
+       ------------------------------------------------------------- */
+    .metrics-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .metric-icon {
+      font-size: 2.2rem;
+      color: var(--primary-color);
+      background: rgba(44, 74, 62, 0.08);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .metric-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Helper styles */
+    .alert {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .alert-success {
+      background: rgba(46, 204, 113, 0.15);
+      color: #1e7e34;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+    }
+    .alert-warning {
+      background: rgba(243, 156, 18, 0.15);
+      color: #d35400;
+      border: 1px solid rgba(243, 156, 18, 0.3);
+    }
+
+    .flex-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* -------------------------------------------------------------
+       RESPONSIVE ADJUSTMENTS
+       ------------------------------------------------------------- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      .nav-tabs {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+      .tab-btn {
+        flex: 1;
+        justify-content: center;
+        white-space: nowrap;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER / NAVIGATION
+       ========================================== -->
+  <header>
+    <div class="logo-container">
+      <i class="fa-solid fa-gem"></i>
+      <span class="logo-title">Eternal Love Admin</span>
+    </div>
+    <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('settings')">
+        <i class="fa-solid fa-gears"></i> Pengaturan Web
+      </button>
+      <button class="tab-btn" onclick="switchTab('share')">
+        <i class="fa-solid fa-paper-plane"></i> Share & Tamu
+      </button>
+      <button class="tab-btn" onclick="switchTab('rsvp')">
+        <i class="fa-solid fa-envelope-open-text"></i> RSVP & Ucapan
+      </button>
+    </nav>
+  </header>
+
+  <!-- ==========================================
+       MAIN DASHBOARD CONTENT
+       ========================================== -->
+  <main>
+    
+    <!-- NOTIFIKASI STATUS CONFIG -->
+    <div id="config-alert" class="alert alert-warning">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>Google Apps Script URL belum diatur. Fitur simpan ke Google Sheet & pelacakan tamu tidak akan berjalan. Silakan atur di Pengaturan Web.</span>
+    </div>
+
+    <!-- ==========================================
+         VIEW 1: PENGATURAN WEB (EDIT ISI UNDANGAN)
+         ========================================== -->
+    <div id="view-settings" class="view-content active">
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-gears"></i> Integrasi Google Sheet</h2>
+        <div class="form-group full-width" style="margin-bottom: 1rem;">
+          <label for="script-url">Google Apps Script Web App URL</label>
+          <input type="text" id="script-url" placeholder="https://script.google.com/macros/s/.../exec" onchange="saveConfig()">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Mendapatkan URL ini dari deployment Apps Script di Google Sheet Anda.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-user-friends"></i> Data Mempelai</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="bride-name">Nama Panggilan Pengantin Wanita</label>
+            <input type="text" id="bride-name" placeholder="Siti" onchange="saveConfig()">
+          </div>
+          <div class="form-group">
+            <label for="bride-fullname">Nama Lengkap Pengantin Wanita</label>
+            <input type="text" id="bride-fullname" placeholder="Siti Rahmawati, S.Kom" onchange="saveConfig()">
+          </div>
+          <div class="form-group">
+            <label for="bride-parents">Nama Orang Tua Wanita</label>
+            <input type="text" id="bride-parents" placeholder="Putri dari Bpk. Ahmad & Ibu Fatimah" onchange="saveConfig()">
+          </div>
+
+          <div class="form-group">
+            <label for="groom-name">Nama Panggilan Pengantin Pria</label>
+            <input type="text" id="groom-name" placeholder="Budi" onchange="saveConfig()">
+          </div>
+          <div class="form-group">
+            <label for="groom-fullname">Nama Lengkap Pengantin Pria</label>
+            <input type="text" id="groom-fullname" placeholder="Budi Santoso, M.B.A" onchange="saveConfig()">
+          </div>
+          <div class="form-group">
+            <label for="groom-parents">Nama Orang Tua Pria</label>
+            <input type="text" id="groom-parents" placeholder="Putra dari Bpk. Bambang & Ibu Retno" onchange="saveConfig()">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-calendar-days"></i> Detail Acara & Lokasi</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="event-date">Tanggal Pernikahan (YYYY-MM-DD)</label>
+            <input type="date" id="event-date" onchange="saveConfig()">
+          </div>
+          <div class="form-group">
+            <label for="akad-time">Waktu Akad (WIB/WITA/WIT)</label>
+            <input type="text" id="akad-time" placeholder="08.00 - 10.00 WIB" onchange="saveConfig()">
+          </div>
+          <div class="form-group">
+            <label for="recep-time">Waktu Resepsi (WIB/WITA/WIT)</label>
+            <input type="text" id="recep-time" placeholder="11.00 - Selesai" onchange="saveConfig()">
+          </div>
+          <div class="form-group full-width">
+            <label for="event-address">Alamat Lengkap Acara</label>
+            <textarea id="event-address" rows="3" placeholder="Gedung Serbaguna Indah, Jl. Melati No. 45, Jakarta" onchange="saveConfig()"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label for="maps-url">Google Maps Share Link (atau Google Maps Embed Src URL)</label>
+            <input type="text" id="maps-url" placeholder="https://maps.app.goo.gl/... atau https://www.google.com/maps/embed?..." onchange="saveConfig()">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-music"></i> Pengaturan Tambahan</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="music-url">Direct Audio/Music URL (MP3)</label>
+            <input type="text" id="music-url" placeholder="https://example.com/wedding-song.mp3" onchange="saveConfig()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Masukkan link MP3 untuk instrumen pengiring undangan digital.</span>
+          </div>
+          <div class="form-group">
+            <label for="wa-template">Template WhatsApp Share</label>
+            <textarea id="wa-template" rows="4" onchange="saveConfig()"></textarea>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Gunakan <strong>[nama]</strong> untuk nama tamu dan <strong>[link]</strong> untuk menyisipkan link undangan personal.</span>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: right; margin-bottom: 2rem;">
+        <button class="btn btn-primary" onclick="alert('Pengaturan disimpan otomatis di LocalStorage!')">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         VIEW 2: SHARE & TAMU (GENERATOR WA & LOG AKSES)
+         ========================================== -->
+    <div id="view-share" class="view-content">
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-user-plus"></i> Tambah Tamu Undangan</h2>
+        <form id="guest-form" onsubmit="addGuest(event)">
+          <div class="form-grid" style="align-items: flex-end;">
+            <div class="form-group">
+              <label for="guest-name">Nama Tamu</label>
+              <input type="text" id="guest-name" placeholder="Contoh: Bpk. Budi & Istri" required>
+            </div>
+            <div class="form-group">
+              <label for="guest-phone">No. WhatsApp Tamu (Gunakan format 62...)</label>
+              <input type="text" id="guest-phone" placeholder="Contoh: 628123456789" required>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary" style="width: 100%; height: 46px;">
+                <i class="fa-solid fa-plus"></i> Tambah & Buat Link
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <h2 class="card-title" style="margin-bottom: 0; border: none; padding: 0;">
+            <i class="fa-solid fa-list-check"></i> Daftar Tamu & Pelacakan Akses
+          </h2>
+          <div class="flex-actions">
+            <button class="btn btn-outline" onclick="fetchDatabase()">
+              <i class="fa-solid fa-arrows-rotate"></i> Sync Google Sheets
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Nama Tamu</th>
+                <th>Nomor WhatsApp</th>
+                <th>Status Akses</th>
+                <th>Frekuensi Akses</th>
+                <th>Akses Pertama</th>
+                <th>Akses Terakhir</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="guest-list-body">
+              <!-- Tamu akan dirender lewat JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         VIEW 3: RSVP & UCAPAN TAMU
+         ========================================== -->
+    <div id="view-rsvp" class="view-content">
+      <!-- Ringkasan Metrik RSVP -->
+      <div class="metrics-container">
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fa-solid fa-check"></i></div>
+          <div>
+            <div id="count-hadir" class="metric-value">0</div>
+            <div class="metric-label">Hadir (Pax)</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fa-solid fa-xmark"></i></div>
+          <div>
+            <div id="count-absen" class="metric-value">0</div>
+            <div class="metric-label">Tidak Hadir</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fa-solid fa-comments"></i></div>
+          <div>
+            <div id="count-wishes" class="metric-value">0</div>
+            <div class="metric-label">Ucapan Masuk</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-circle-check"></i> Konfirmasi Kehadiran Tamu (RSVP)</h2>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Nama Tamu</th>
+                <th>No WhatsApp</th>
+                <th>Konfirmasi Kehadiran</th>
+                <th>Jumlah Tamu</th>
+                <th>Waktu RSVP</th>
+              </tr>
+            </thead>
+            <tbody id="rsvp-list-body">
+              <!-- RSVP akan dirender lewat JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-heart"></i> Ucapan & Doa Tamu</h2>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Nama Tamu</th>
+                <th>Ucapan & Doa</th>
+                <th>Tanggal Kirim</th>
+              </tr>
+            </thead>
+            <tbody id="wishes-list-body">
+              <!-- Ucapan akan dirender lewat JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================
+       JAVASCRIPT DASHBOARD LOGIC
+       ========================================== -->
+  <script>
+    // 1. STRUKTUR DEFAULT CONFIG (PENGATURAN)
+    const defaultConfig = {
+      scriptUrl: "",
+      brideName: "Siti",
+      brideFullname: "Siti Rahmawati, S.Kom",
+      brideParents: "Putri dari Bpk. Ahmad & Ibu Fatimah",
+      groomName: "Budi",
+      groomFullname: "Budi Santoso, M.B.A",
+      groomParents: "Putra dari Bpk. Bambang & Ibu Retno",
+      eventDate: "2026-10-10",
+      akadTime: "08.00 - 10.00 WIB",
+      recepTime: "11.00 - Selesai",
+      eventAddress: "Gedung Serbaguna Indah, Jl. Melati No. 45, Jakarta",
+      mapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2994474775444!2d106.817366!3d-6.224185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3fa1a08080d%3A0x7d6f5466c4ef7645!2sJakarta!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid",
+      musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      waTemplate: "Halo *[nama]*, \n\nDengan penuh rasa syukur, kami mengundang Anda untuk menghadiri acara pernikahan kami:\n\n*Siti & Budi*\n\nBerikut link undangan personal Anda yang berisi detail acara & RSVP online:\n[link]\n\nKehadiran dan doa restu Anda adalah suatu kehormatan bagi kami.\n\nTerima kasih."
+    };
+
+    // Database Tamu Lokal (Sebagai cadangan bila tidak terkoneksi Sheet)
+    let guestDatabase = JSON.parse(localStorage.getItem('wedding_guests')) || [];
+    let rsvpDatabase = [];
+    let wishesDatabase = [];
+
+    // Inisialisasi saat window dimuat
+    window.onload = function() {
+      loadConfig();
+      renderGuests();
+      fetchDatabase(); // Ambil data terupdate dari Google Sheet jika terkonfigurasi
+    };
+
+    // 2. FUNGSI LOAD & SAVE CONFIG (LOCALSTORAGE)
+    function loadConfig() {
+      let savedConfig = JSON.parse(localStorage.getItem('wedding_config')) || defaultConfig;
+      
+      // Sinkronisasi form input
+      document.getElementById('script-url').value = savedConfig.scriptUrl || "";
+      document.getElementById('bride-name').value = savedConfig.brideName || "";
+      document.getElementById('bride-fullname').value = savedConfig.brideFullname || "";
+      document.getElementById('bride-parents').value = savedConfig.brideParents || "";
+      document.getElementById('groom-name').value = savedConfig.groomName || "";
+      document.getElementById('groom-fullname').value = savedConfig.groomFullname || "";
+      document.getElementById('groom-parents').value = savedConfig.groomParents || "";
+      document.getElementById('event-date').value = savedConfig.eventDate || "";
+      document.getElementById('akad-time').value = savedConfig.akadTime || "";
+      document.getElementById('recep-time').value = savedConfig.recepTime || "";
+      document.getElementById('event-address').value = savedConfig.eventAddress || "";
+      document.getElementById('maps-url').value = savedConfig.mapsUrl || "";
+      document.getElementById('music-url').value = savedConfig.musicUrl || "";
+      document.getElementById('wa-template').value = savedConfig.waTemplate || "";
+
+      checkAlertStatus(savedConfig.scriptUrl);
+    }
+
+    function saveConfig() {
+      let config = {
+        scriptUrl: document.getElementById('script-url').value.trim(),
+        brideName: document.getElementById('bride-name').value.trim(),
+        brideFullname: document.getElementById('bride-fullname').value.trim(),
+        brideParents: document.getElementById('bride-parents').value.trim(),
+        groomName: document.getElementById('groom-name').value.trim(),
+        groomFullname: document.getElementById('groom-fullname').value.trim(),
+        groomParents: document.getElementById('groom-parents').value.trim(),
+        eventDate: document.getElementById('event-date').value,
+        akadTime: document.getElementById('akad-time').value.trim(),
+        recepTime: document.getElementById('recep-time').value.trim(),
+        eventAddress: document.getElementById('event-address').value.trim(),
+        mapsUrl: document.getElementById('maps-url').value.trim(),
+        musicUrl: document.getElementById('music-url').value.trim(),
+        waTemplate: document.getElementById('wa-template').value
+      };
+      
+      localStorage.setItem('wedding_config', JSON.stringify(config));
+      checkAlertStatus(config.scriptUrl);
+    }
+
+    function checkAlertStatus(url) {
+      const alertDiv = document.getElementById('config-alert');
+      if (url) {
+        alertDiv.className = "alert alert-success";
+        alertDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Terkoneksi dengan Google Apps Script. Data tamu sinkron secara real-time!';
+      } else {
+        alertDiv.className = "alert alert-warning";
+        alertDiv.innerHTML = '<i class="fa-solid fa-circle-info"></i> Google Apps Script URL belum diatur. Fitur simpan ke Google Sheet & pelacakan tamu tidak akan berjalan. Silakan atur di Pengaturan Web.';
+      }
+    }
+
+    // 3. FUNGSI SINKRONISASI DATABASE GOOGLE SHEETS
+    async function fetchDatabase() {
+      let savedConfig = JSON.parse(localStorage.getItem('wedding_config')) || defaultConfig;
+      if (!savedConfig.scriptUrl) return;
+
+      try {
+        const response = await fetch(`${savedConfig.scriptUrl}?action=getDashboardData`);
+        const result = await response.json();
+        
+        if (result.status === "success") {
+          // Sync tamu, RSVP, dan Wishes dari Google Sheet
+          if (result.data.guests && result.data.guests.length > 0) {
+            // Gabungkan tamu dari Google Sheet ke dalam DB lokal (Sheet prioritas)
+            guestDatabase = result.data.guests;
+            localStorage.setItem('wedding_guests', JSON.stringify(guestDatabase));
+          }
+          rsvpDatabase = result.data.rsvps || [];
+          wishesDatabase = result.data.wishes || [];
+          
+          renderGuests();
+          renderRSVPsAndWishes();
+        }
+      } catch (error) {
+        console.error("Gagal sinkronisasi data dari Google Sheet:", error);
+      }
+    }
+
+    // 4. NAVIGASI TAB MODUL
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.view-content').forEach(view => view.classList.remove('active'));
+      
+      event.currentTarget.classList.add('active');
+      document.getElementById('view-' + tabId).classList.add('active');
+      
+      // Auto fetch jika tab RSVP dibuka
+      if (tabId === 'rsvp' || tabId === 'share') {
+        fetchDatabase();
+      }
+    }
+
+    // 5. MEMBUAT UNDANGAN TAMU BARU
+    function addGuest(e) {
+      e.preventDefault();
+      
+      let name = document.getElementById('guest-name').value.trim();
+      let phone = document.getElementById('guest-phone').value.trim();
+      
+      // Standarisasi format nomor HP (ke 62...)
+      if (phone.startsWith('0')) {
+        phone = '62' + phone.substring(1);
+      } else if (phone.startsWith('+')) {
+        phone = phone.replace('+', '');
+      }
+
+      // Hindari duplikasi tamu
+      if (guestDatabase.some(g => g.name === name && g.phone === phone)) {
+        alert("Tamu dengan nama dan nomor tersebut sudah ada!");
+        return;
+      }
+
+      let newGuest = {
+        name: name,
+        phone: phone,
+        status: "Invited",
+        accessCount: 0,
+        firstAccess: "-",
+        lastAccess: "-"
+      };
+
+      guestDatabase.push(newGuest);
+      localStorage.setItem('wedding_guests', JSON.stringify(guestDatabase));
+      
+      document.getElementById('guest-form').reset();
+      renderGuests();
+
+      // Kirim tamu baru ke Google Sheet jika ada API URL
+      sendGuestToSheet(newGuest);
+    }
+
+    async function sendGuestToSheet(guest) {
+      let savedConfig = JSON.parse(localStorage.getItem('wedding_config')) || defaultConfig;
+      if (!savedConfig.scriptUrl) return;
+
+      try {
+        await fetch(savedConfig.scriptUrl, {
+          method: 'POST',
+          mode: 'no-cors', // Apps Script tidak memiliki default CORS headers untuk CORS request biasa
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: "logAccess", // Ini akan mendaftarkan tamu baru ke Google Sheet tanpa menaikkan counter akses tamu
+            name: guest.name,
+            phone: guest.phone,
+            status: "Invited"
+          })
+        });
+      } catch (e) {
+        console.error("Gagal mengirim tamu baru ke Google Sheet:", e);
+      }
+    }
+
+    // Hapus Tamu
+    function deleteGuest(index) {
+      if (confirm("Apakah Anda yakin ingin menghapus tamu ini dari daftar lokal?")) {
+        guestDatabase.splice(index, 1);
+        localStorage.setItem('wedding_guests', JSON.stringify(guestDatabase));
+        renderGuests();
+      }
+    }
+
+    // 6. RENDER DAFTAR TAMU & GENERATE LINK WHATSAPP
+    function renderGuests() {
+      const tbody = document.getElementById('guest-list-body');
+      tbody.innerHTML = '';
+
+      if (guestDatabase.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Belum ada tamu. Silakan tambah tamu di atas.</td></tr>`;
+        return;
+      }
+
+      // Mendapatkan URL website saat ini untuk generate link
+      const currentUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/index.html';
+
+      guestDatabase.forEach((guest, index) => {
+        // Buat custom link undangan tamu
+        const encodedName = encodeURIComponent(guest.name);
+        const guestLink = `${currentUrl}?to=${encodedName}&phone=${guest.phone}`;
+
+        // Format template pesan WhatsApp
+        let savedConfig = JSON.parse(localStorage.getItem('wedding_config')) || defaultConfig;
+        let waMessage = savedConfig.waTemplate
+          .replace('[nama]', guest.name)
+          .replace('[link]', guestLink);
+        const encodedWaMessage = encodeURIComponent(waMessage);
+
+        const waApiUrl = `https://api.whatsapp.com/send?phone=${guest.phone}&text=${encodedWaMessage}`;
+
+        // Tampilkan status dengan badge berwarna
+        let statusBadge = `<span class="badge badge-warning">Belum Buka</span>`;
+        if (guest.status === "Accessed") {
+          statusBadge = `<span class="badge badge-success"><i class="fa-solid fa-eye"></i> Dibuka</span>`;
+        } else if (guest.status && guest.status.startsWith("RSVP:")) {
+          statusBadge = `<span class="badge badge-info"><i class="fa-solid fa-envelope"></i> ${guest.status}</span>`;
+        }
+
+        // Format waktu akses
+        const formatTime = (timeStr) => {
+          if (!timeStr || timeStr === "-") return "-";
+          try {
+            const d = new Date(timeStr);
+            if (isNaN(d.getTime())) return timeStr;
+            return d.toLocaleString('id-ID', { hour12: false });
+          } catch(e) {
+            return timeStr;
+          }
+        };
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${guest.name}</strong></td>
+          <td>${guest.phone}</td>
+          <td>${statusBadge}</td>
+          <td style="text-align: center;">${guest.accessCount || 0}x</td>
+          <td><span style="font-size: 0.85rem;">${formatTime(guest.firstAccess)}</span></td>
+          <td><span style="font-size: 0.85rem;">${formatTime(guest.lastAccess)}</span></td>
+          <td>
+            <div class="flex-actions">
+              <a href="${waApiUrl}" target="_blank" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                <i class="fa-brands fa-whatsapp"></i> Share WA
+              </a>
+              <button onclick="copyToClipboard('${guestLink}')" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                <i class="fa-solid fa-copy"></i> Link
+              </button>
+              <button onclick="deleteGuest(${index})" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; border-color: #e74c3c; color: #e74c3c;">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Salin Tautan Ke Clipboard
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link undangan personal disalin ke clipboard!");
+      }).catch(err => {
+        console.error("Gagal menyalin link:", err);
+      });
+    }
+
+    // 7. RENDER DATA RSVP & UCAPAN TAMU
+    function renderRSVPsAndWishes() {
+      // Hitung metrik
+      let countHadir = 0;
+      let countAbsen = 0;
+
+      // Render RSVP
+      const rsvpBody = document.getElementById('rsvp-list-body');
+      rsvpBody.innerHTML = '';
+
+      if (rsvpDatabase.length === 0) {
+        rsvpBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Belum ada data RSVP masuk dari Google Sheets.</td></tr>`;
+      } else {
+        rsvpDatabase.forEach(rsvp => {
+          let attendanceBadge = '';
+          if (rsvp.attendance === "Hadir") {
+            attendanceBadge = `<span class="badge badge-success">Hadir</span>`;
+            countHadir += parseInt(rsvp.guestsCount || 1);
+          } else {
+            attendanceBadge = `<span class="badge badge-warning">Tidak Hadir</span>`;
+            countAbsen++;
+          }
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${rsvp.name}</strong></td>
+            <td>${rsvp.phone || '-'}</td>
+            <td>${attendanceBadge}</td>
+            <td style="text-align: center;">${rsvp.attendance === "Hadir" ? (rsvp.guestsCount || 1) : 0} Pax</td>
+            <td><span style="font-size: 0.85rem;">${new Date(rsvp.timestamp).toLocaleString('id-ID')}</span></td>
+          `;
+          rsvpBody.appendChild(tr);
+        });
+      }
+
+      document.getElementById('count-hadir').innerText = countHadir;
+      document.getElementById('count-absen').innerText = countAbsen;
+
+      // Render Wishes
+      const wishesBody = document.getElementById('wishes-list-body');
+      wishesBody.innerHTML = '';
+      
+      document.getElementById('count-wishes').innerText = wishesDatabase.length;
+
+      if (wishesDatabase.length === 0) {
+        wishesBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-muted);">Belum ada ucapan masuk.</td></tr>`;
+      } else {
+        wishesDatabase.forEach(wish => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${wish.name}</strong></td>
+            <td><em>"${wish.wish}"</em></td>
+            <td><span style="font-size: 0.85rem;">${new Date(wish.timestamp).toLocaleString('id-ID')}</span></td>
+          `;
+          wishesBody.appendChild(tr);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
