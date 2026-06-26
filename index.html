@@ -21,7 +21,7 @@
     :root {
       --primary-color: #2c4a3e; /* Forest green elegan */
       --secondary-color: #d4af37; /* Gold mewah */
-      --secondary-dark: #b89326;
+      --secondary-dark: color-mix(in srgb, var(--secondary-color) 80%, black);
       --bg-cream: #faf8f5;
       --text-dark: #2c3e50;
       --text-light: #ffffff;
@@ -30,7 +30,7 @@
       --font-body: 'Outfit', sans-serif;
       --font-accent: 'Sacramento', cursive;
       --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      --border-style: 1px solid rgba(212, 175, 55, 0.2);
+      --border-style: 1px solid color-mix(in srgb, var(--secondary-color) 20%, transparent);
     }
 
     * {
@@ -56,7 +56,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(rgba(44, 74, 62, 0.9), rgba(44, 74, 62, 0.95)), 
+      background: linear-gradient(color-mix(in srgb, var(--primary-color) 90%, black), color-mix(in srgb, var(--primary-color) 95%, black)), 
                   url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200') no-repeat center center/cover;
       z-index: 999;
       display: flex;
@@ -134,7 +134,7 @@
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 4px 15px color-mix(in srgb, var(--secondary-color) 30%, transparent);
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
@@ -239,20 +239,34 @@
 
     /* Mempelai Section */
     .mempelai-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
       margin-top: 3rem;
     }
 
     @media (min-width: 768px) {
       .mempelai-grid {
-        grid-template-columns: 1fr 1fr;
+        flex-direction: row;
+        gap: 2rem;
       }
     }
 
     .profile-card {
-      padding: 1rem;
+      padding: 1.5rem;
+      flex: 1;
+      max-width: 320px;
+      background: var(--bg-cream);
+      border: 1px solid color-mix(in srgb, var(--primary-color) 8%, transparent);
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
     }
 
     .profile-avatar {
@@ -578,7 +592,7 @@
         <!-- Pengantin Wanita -->
         <div class="profile-card">
           <!-- Gambar dummy default atau foto avatar pengantin -->
-          <img class="profile-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" alt="Bride Avatar">
+          <img id="bride-avatar" class="profile-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" alt="Bride Avatar">
           <h3 class="profile-name" id="bride-fullname">Siti Rahmawati, S.Kom</h3>
           <p class="profile-parents" id="bride-parents">Putri dari Bpk. Ahmad & Ibu Fatimah</p>
           <a class="profile-social" href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
@@ -588,7 +602,7 @@
 
         <!-- Pengantin Pria -->
         <div class="profile-card">
-          <img class="profile-avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150" alt="Groom Avatar">
+          <img id="groom-avatar" class="profile-avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150" alt="Groom Avatar">
           <h3 class="profile-name" id="groom-fullname">Budi Santoso, M.B.A</h3>
           <p class="profile-parents" id="groom-parents">Putra dari Bpk. Bambang & Ibu Retno</p>
           <a class="profile-social" href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
@@ -762,7 +776,9 @@
       recepTime: "11.00 - Selesai",
       eventAddress: "Gedung Serbaguna Indah, Jl. Melati No. 45, Jakarta",
       mapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2994474775444!2d106.817366!3d-6.224185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3fa1a08080d%3A0x7d6f5466c4ef7645!2sJakarta!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid",
-      musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+      musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      themePrimary: "#2c4a3e",
+      themeSecondary: "#d4af37"
     };
 
     let activeConfig = defaultConfig;
@@ -775,6 +791,14 @@
       let savedConfig = localStorage.getItem('wedding_config');
       if (savedConfig) {
         activeConfig = JSON.parse(savedConfig);
+      }
+
+      // Terapkan warna tema jika diatur
+      if (activeConfig.themePrimary) {
+        document.documentElement.style.setProperty('--primary-color', activeConfig.themePrimary);
+      }
+      if (activeConfig.themeSecondary) {
+        document.documentElement.style.setProperty('--secondary-color', activeConfig.themeSecondary);
       }
       
       // Ambil parameter URL (untuk nama tamu personal)
@@ -805,6 +829,14 @@
       document.getElementById('bride-parents').innerText = activeConfig.brideParents;
       document.getElementById('groom-fullname').innerText = activeConfig.groomFullname;
       document.getElementById('groom-parents').innerText = activeConfig.groomParents;
+
+      // Foto Mempelai (jika diupload via admin)
+      if (activeConfig.bridePhoto) {
+        document.getElementById('bride-avatar').src = activeConfig.bridePhoto;
+      }
+      if (activeConfig.groomPhoto) {
+        document.getElementById('groom-avatar').src = activeConfig.groomPhoto;
+      }
 
       // Format detail Akad & Resepsi
       try {

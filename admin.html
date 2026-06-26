@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Admin Undangan Digital</title>
-  
+
   <!-- Font Premium Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap"
+    rel="stylesheet">
+
   <!-- Icon FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <style>
     /* -------------------------------------------------------------
        CSS DESIGN SYSTEM: VARIABLES & RESET
@@ -20,8 +23,10 @@
     :root {
       --bg-primary: #f8f6f0;
       --bg-card: rgba(255, 255, 255, 0.85);
-      --primary-color: #2c4a3e; /* Forest Green elegant */
-      --secondary-color: #d4af37; /* Luxury Gold */
+      --primary-color: #2c4a3e;
+      /* Forest Green elegant */
+      --secondary-color: #d4af37;
+      /* Luxury Gold */
       --text-dark: #2c3e50;
       --text-muted: #7f8c8d;
       --border-radius: 12px;
@@ -44,7 +49,7 @@
       line-height: 1.6;
       min-height: 100vh;
       background-image: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(44, 74, 62, 0.05) 0%, transparent 40%);
+        radial-gradient(circle at 90% 80%, rgba(44, 74, 62, 0.05) 0%, transparent 40%);
     }
 
     /* -------------------------------------------------------------
@@ -59,7 +64,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -104,7 +109,8 @@
       gap: 8px;
     }
 
-    .tab-btn.active, .tab-btn:hover {
+    .tab-btn.active,
+    .tab-btn:hover {
       color: var(--primary-color);
       background: rgba(44, 74, 62, 0.08);
     }
@@ -134,8 +140,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* -------------------------------------------------------------
@@ -186,7 +199,9 @@
       color: var(--primary-color);
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       padding: 0.8rem 1rem;
       border: 1.5px solid rgba(44, 74, 62, 0.15);
       border-radius: 8px;
@@ -197,7 +212,9 @@
       transition: var(--transition);
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus,
+    select:focus,
+    textarea:focus {
       outline: none;
       border-color: var(--primary-color);
       box-shadow: 0 0 0 3px rgba(44, 74, 62, 0.1);
@@ -264,9 +281,10 @@
       text-align: left;
     }
 
-    th, td {
+    th,
+    td {
       padding: 1rem;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     th {
@@ -276,7 +294,7 @@
     }
 
     tr:hover {
-      background-color: rgba(0,0,0,0.01);
+      background-color: rgba(0, 0, 0, 0.01);
     }
 
     .badge {
@@ -287,9 +305,20 @@
       font-weight: 600;
     }
 
-    .badge-success { background: rgba(46, 204, 113, 0.15); color: #27ae60; }
-    .badge-warning { background: rgba(241, 196, 15, 0.15); color: #d35400; }
-    .badge-info { background: rgba(52, 152, 219, 0.15); color: #2980b9; }
+    .badge-success {
+      background: rgba(46, 204, 113, 0.15);
+      color: #27ae60;
+    }
+
+    .badge-warning {
+      background: rgba(241, 196, 15, 0.15);
+      color: #d35400;
+    }
+
+    .badge-info {
+      background: rgba(52, 152, 219, 0.15);
+      color: #2980b9;
+    }
 
     /* -------------------------------------------------------------
        DASHBOARD METRICS CARDS
@@ -347,11 +376,13 @@
       align-items: center;
       gap: 10px;
     }
+
     .alert-success {
       background: rgba(46, 204, 113, 0.15);
       color: #1e7e34;
       border: 1px solid rgba(46, 204, 113, 0.3);
     }
+
     .alert-warning {
       background: rgba(243, 156, 18, 0.15);
       color: #d35400;
@@ -363,6 +394,32 @@
       gap: 0.5rem;
     }
 
+    .mempelai-editor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .mempelai-col-card {
+      background: rgba(0, 0, 0, 0.015);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .mempelai-col-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--primary-color);
+      border-bottom: 1.5px solid color-mix(in srgb, var(--primary-color) 15%, transparent);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     /* -------------------------------------------------------------
        RESPONSIVE ADJUSTMENTS
        ------------------------------------------------------------- */
@@ -372,22 +429,26 @@
         gap: 1rem;
         padding: 1rem;
       }
+
       .nav-tabs {
         width: 100%;
         overflow-x: auto;
         padding-bottom: 5px;
       }
+
       .tab-btn {
         flex: 1;
         justify-content: center;
         white-space: nowrap;
       }
+
       .form-grid {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- ==========================================
@@ -396,7 +457,7 @@
   <header>
     <div class="logo-container">
       <i class="fa-solid fa-gem"></i>
-      <span class="logo-title">Eternal Love Admin</span>
+      <span class="logo-title">Sakral Dev</span>
     </div>
     <nav class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab('settings')">
@@ -415,11 +476,12 @@
        MAIN DASHBOARD CONTENT
        ========================================== -->
   <main>
-    
+
     <!-- NOTIFIKASI STATUS CONFIG -->
     <div id="config-alert" class="alert alert-warning">
       <i class="fa-solid fa-circle-info"></i>
-      <span>Google Apps Script URL belum diatur. Fitur simpan ke Google Sheet & pelacakan tamu tidak akan berjalan. Silakan atur di Pengaturan Web.</span>
+      <span>Google Apps Script URL belum diatur. Fitur simpan ke Google Sheet & pelacakan tamu tidak akan berjalan.
+        Silakan atur di Pengaturan Web.</span>
     </div>
 
     <!-- ==========================================
@@ -430,38 +492,68 @@
         <h2 class="card-title"><i class="fa-solid fa-gears"></i> Integrasi Google Sheet</h2>
         <div class="form-group full-width" style="margin-bottom: 1rem;">
           <label for="script-url">Google Apps Script Web App URL</label>
-          <input type="text" id="script-url" placeholder="https://script.google.com/macros/s/.../exec" onchange="saveConfig()">
-          <span style="font-size: 0.8rem; color: var(--text-muted);">Mendapatkan URL ini dari deployment Apps Script di Google Sheet Anda.</span>
+          <input type="text" id="script-url" placeholder="https://script.google.com/macros/s/.../exec"
+            onchange="saveConfig()">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Mendapatkan URL ini dari deployment Apps Script di
+            Google Sheet Anda.</span>
         </div>
       </div>
 
       <div class="card">
         <h2 class="card-title"><i class="fa-solid fa-user-friends"></i> Data Mempelai</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="bride-name">Nama Panggilan Pengantin Wanita</label>
-            <input type="text" id="bride-name" placeholder="Siti" onchange="saveConfig()">
-          </div>
-          <div class="form-group">
-            <label for="bride-fullname">Nama Lengkap Pengantin Wanita</label>
-            <input type="text" id="bride-fullname" placeholder="Siti Rahmawati, S.Kom" onchange="saveConfig()">
-          </div>
-          <div class="form-group">
-            <label for="bride-parents">Nama Orang Tua Wanita</label>
-            <input type="text" id="bride-parents" placeholder="Putri dari Bpk. Ahmad & Ibu Fatimah" onchange="saveConfig()">
+        <div class="mempelai-editor-grid">
+          <!-- Kolom Pengantin Wanita -->
+          <div class="mempelai-col-card">
+            <h3 class="mempelai-col-title"><i class="fa-solid fa-venus"></i> Pengantin Wanita</h3>
+            <div class="form-group">
+              <label for="bride-name">Nama Panggilan</label>
+              <input type="text" id="bride-name" placeholder="Panggilan Mempelai wanita" onchange="saveConfig()">
+            </div>
+            <div class="form-group">
+              <label for="bride-fullname">Nama Lengkap</label>
+              <input type="text" id="bride-fullname" placeholder="Nama lengkap mempelai wanita" onchange="saveConfig()">
+            </div>
+            <div class="form-group">
+              <label for="bride-parents">Nama Orang Tua</label>
+              <input type="text" id="bride-parents" placeholder="Putri dari Bpk... & Ibu ..." onchange="saveConfig()">
+            </div>
+            <div class="form-group">
+              <label>Foto Profil</label>
+              <div style="display: flex; gap: 15px; align-items: center; background: rgba(0,0,0,0.02); padding: 0.8rem; border-radius: 8px; border: 1px dashed rgba(0,0,0,0.15);">
+                <img id="bride-photo-preview" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary-color); background: white;">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+                  <input type="file" id="bride-photo-input" accept="image/*" onchange="handlePhotoUpload(this, 'bride')" style="font-size: 0.85rem; padding: 0.2rem; border: none; background: transparent; width: 100%;">
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Format JPG/PNG (Maks 1MB)</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="groom-name">Nama Panggilan Pengantin Pria</label>
-            <input type="text" id="groom-name" placeholder="Budi" onchange="saveConfig()">
-          </div>
-          <div class="form-group">
-            <label for="groom-fullname">Nama Lengkap Pengantin Pria</label>
-            <input type="text" id="groom-fullname" placeholder="Budi Santoso, M.B.A" onchange="saveConfig()">
-          </div>
-          <div class="form-group">
-            <label for="groom-parents">Nama Orang Tua Pria</label>
-            <input type="text" id="groom-parents" placeholder="Putra dari Bpk. Bambang & Ibu Retno" onchange="saveConfig()">
+          <!-- Kolom Pengantin Pria -->
+          <div class="mempelai-col-card">
+            <h3 class="mempelai-col-title"><i class="fa-solid fa-mars"></i> Pengantin Pria</h3>
+            <div class="form-group">
+              <label for="groom-name">Nama Panggilan</label>
+              <input type="text" id="groom-name" placeholder="Panggilan Mempelai Pria" onchange="saveConfig()">
+            </div>
+            <div class="form-group">
+              <label for="groom-fullname">Nama Lengkap</label>
+              <input type="text" id="groom-fullname" placeholder="Nama lengkap mempelai Pria" onchange="saveConfig()">
+            </div>
+            <div class="form-group">
+              <label for="groom-parents">Nama Orang Tua</label>
+              <input type="text" id="groom-parents" placeholder="Putra dari Bpk... & Ibu ..." onchange="saveConfig()">
+            </div>
+            <div class="form-group">
+              <label>Foto Profil</label>
+              <div style="display: flex; gap: 15px; align-items: center; background: rgba(0,0,0,0.02); padding: 0.8rem; border-radius: 8px; border: 1px dashed rgba(0,0,0,0.15);">
+                <img id="groom-photo-preview" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary-color); background: white;">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+                  <input type="file" id="groom-photo-input" accept="image/*" onchange="handlePhotoUpload(this, 'groom')" style="font-size: 0.85rem; padding: 0.2rem; border: none; background: transparent; width: 100%;">
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Format JPG/PNG (Maks 1MB)</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -483,11 +575,58 @@
           </div>
           <div class="form-group full-width">
             <label for="event-address">Alamat Lengkap Acara</label>
-            <textarea id="event-address" rows="3" placeholder="Gedung Serbaguna Indah, Jl. Melati No. 45, Jakarta" onchange="saveConfig()"></textarea>
+            <textarea id="event-address" rows="3" placeholder="Isi Alamat Acara" onchange="saveConfig()"></textarea>
           </div>
           <div class="form-group full-width">
             <label for="maps-url">Google Maps Share Link (atau Google Maps Embed Src URL)</label>
-            <input type="text" id="maps-url" placeholder="https://maps.app.goo.gl/... atau https://www.google.com/maps/embed?..." onchange="saveConfig()">
+            <input type="text" id="maps-url"
+              placeholder="https://maps.app.goo.gl/... atau https://www.google.com/maps/embed?..."
+              onchange="saveConfig()">
+          </div>
+        </div>
+      </div>
+
+      <!-- TEMA WARNA UNDANGAN -->
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-palette"></i> Tema Warna Undangan</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Pilih Tema Preset</label>
+            <div class="theme-presets" style="display: flex; gap: 10px; margin-top: 5px; flex-wrap: wrap;">
+              <button type="button" class="theme-preset-btn" onclick="applyPresetTheme('#2c4a3e', '#d4af37')"
+                style="background: linear-gradient(135deg, #2c4a3e 50%, #d4af37 50%); border: 2px solid white; outline: 1px solid rgba(0,0,0,0.15); width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"
+                title="Forest Green & Gold"></button>
+              <button type="button" class="theme-preset-btn" onclick="applyPresetTheme('#6b2d5c', '#d4af37')"
+                style="background: linear-gradient(135deg, #6b2d5c 50%, #d4af37 50%); border: 2px solid white; outline: 1px solid rgba(0,0,0,0.15); width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"
+                title="Elegant Burgundy"></button>
+              <button type="button" class="theme-preset-btn" onclick="applyPresetTheme('#1c3144', '#a2aebb')"
+                style="background: linear-gradient(135deg, #1c3144 50%, #a2aebb 50%); border: 2px solid white; outline: 1px solid rgba(0,0,0,0.15); width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"
+                title="Classic Navy"></button>
+              <button type="button" class="theme-preset-btn" onclick="applyPresetTheme('#a05f5f', '#e6c280')"
+                style="background: linear-gradient(135deg, #a05f5f 50%, #e6c280 50%); border: 2px solid white; outline: 1px solid rgba(0,0,0,0.15); width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"
+                title="Dusty Rose"></button>
+              <button type="button" class="theme-preset-btn" onclick="applyPresetTheme('#111111', '#c5a059')"
+                style="background: linear-gradient(135deg, #111111 50%, #c5a059 50%); border: 2px solid white; outline: 1px solid rgba(0,0,0,0.15); width: 40px; height: 40px; border-radius: 50%; cursor: pointer;"
+                title="Midnight Black"></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="primary-color-picker">Warna Utama (Primary)</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <input type="color" id="primary-color-picker" oninput="customColorChanged()"
+                style="width: 50px; height: 42px; padding: 0.1rem; cursor: pointer; border: 1px solid #ccc; border-radius: 6px;">
+              <input type="text" id="primary-color-hex" placeholder="#2c4a3e" onchange="hexInputChanged('primary')"
+                style="flex: 1;">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="secondary-color-picker">Warna Aksen (Secondary)</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <input type="color" id="secondary-color-picker" oninput="customColorChanged()"
+                style="width: 50px; height: 42px; padding: 0.1rem; cursor: pointer; border: 1px solid #ccc; border-radius: 6px;">
+              <input type="text" id="secondary-color-hex" placeholder="#d4af37" onchange="hexInputChanged('secondary')"
+                style="flex: 1;">
+            </div>
           </div>
         </div>
       </div>
@@ -497,17 +636,20 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="music-url">Direct Audio/Music URL (MP3)</label>
-            <input type="text" id="music-url" placeholder="https://example.com/wedding-song.mp3" onchange="saveConfig()">
-            <span style="font-size: 0.8rem; color: var(--text-muted);">Masukkan link MP3 untuk instrumen pengiring undangan digital.</span>
+            <input type="text" id="music-url" placeholder="https://example.com/wedding-song.mp3"
+              onchange="saveConfig()">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Masukkan link MP3 untuk instrumen pengiring
+              undangan digital.</span>
           </div>
           <div class="form-group">
             <label for="wa-template">Template WhatsApp Share</label>
             <textarea id="wa-template" rows="4" onchange="saveConfig()"></textarea>
-            <span style="font-size: 0.8rem; color: var(--text-muted);">Gunakan <strong>[nama]</strong> untuk nama tamu dan <strong>[link]</strong> untuk menyisipkan link undangan personal.</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Gunakan <strong>[nama]</strong> untuk nama tamu
+              dan <strong>[link]</strong> untuk menyisipkan link undangan personal.</span>
           </div>
         </div>
       </div>
-      
+
       <div style="text-align: right; margin-bottom: 2rem;">
         <button class="btn btn-primary" onclick="alert('Pengaturan disimpan otomatis di LocalStorage!')">
           <i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan
@@ -525,7 +667,7 @@
           <div class="form-grid" style="align-items: flex-end;">
             <div class="form-group">
               <label for="guest-name">Nama Tamu</label>
-              <input type="text" id="guest-name" placeholder="Contoh: Bpk. Budi & Istri" required>
+              <input type="text" id="guest-name" placeholder="Contoh: Bpk....& Istri" required>
             </div>
             <div class="form-group">
               <label for="guest-phone">No. WhatsApp Tamu (Gunakan format 62...)</label>
@@ -541,7 +683,8 @@
       </div>
 
       <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
           <h2 class="card-title" style="margin-bottom: 0; border: none; padding: 0;">
             <i class="fa-solid fa-list-check"></i> Daftar Tamu & Pelacakan Akses
           </h2>
@@ -551,7 +694,7 @@
             </button>
           </div>
         </div>
-        
+
         <div class="table-responsive">
           <table>
             <thead>
@@ -650,19 +793,21 @@
     // 1. STRUKTUR DEFAULT CONFIG (PENGATURAN)
     const defaultConfig = {
       scriptUrl: "",
-      brideName: "Siti",
-      brideFullname: "Siti Rahmawati, S.Kom",
-      brideParents: "Putri dari Bpk. Ahmad & Ibu Fatimah",
-      groomName: "Budi",
-      groomFullname: "Budi Santoso, M.B.A",
-      groomParents: "Putra dari Bpk. Bambang & Ibu Retno",
+      brideName: "Nama Panggilan Mempelai Perempuan",
+      brideFullname: "Nama Lengkap Mempelai Perempuan",
+      brideParents: "Putri dari Bpk. ... & Ibu ...",
+      groomName: "Nama Panggilan Mempelai Laki-Laki",
+      groomFullname: "Nama Lengkap Mempelai Laki",
+      groomParents: "Putra dari Bpk. ... & Ibu ...",
       eventDate: "2026-10-10",
       akadTime: "08.00 - 10.00 WIB",
       recepTime: "11.00 - Selesai",
-      eventAddress: "Gedung Serbaguna Indah, Jl. Melati No. 45, Jakarta",
+      eventAddress: "ALAMAT ACARA",
       mapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2994474775444!2d106.817366!3d-6.224185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3fa1a08080d%3A0x7d6f5466c4ef7645!2sJakarta!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid",
       musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      waTemplate: "Halo *[nama]*, \n\nDengan penuh rasa syukur, kami mengundang Anda untuk menghadiri acara pernikahan kami:\n\n*Siti & Budi*\n\nBerikut link undangan personal Anda yang berisi detail acara & RSVP online:\n[link]\n\nKehadiran dan doa restu Anda adalah suatu kehormatan bagi kami.\n\nTerima kasih."
+      waTemplate: "Halo *[nama]*, \n\nDengan penuh rasa syukur, kami mengundang Anda untuk menghadiri acara pernikahan kami:\n\n*Siti & Budi*\n\nBerikut link undangan personal Anda yang berisi detail acara & RSVP online:\n[link]\n\nKehadiran dan doa restu Anda adalah suatu kehormatan bagi kami.\n\nTerima kasih.",
+      themePrimary: "#2c4a3e",
+      themeSecondary: "#d4af37"
     };
 
     // Database Tamu Lokal (Sebagai cadangan bila tidak terkoneksi Sheet)
@@ -671,7 +816,7 @@
     let wishesDatabase = [];
 
     // Inisialisasi saat window dimuat
-    window.onload = function() {
+    window.onload = function () {
       loadConfig();
       renderGuests();
       fetchDatabase(); // Ambil data terupdate dari Google Sheet jika terkonfigurasi
@@ -680,7 +825,7 @@
     // 2. FUNGSI LOAD & SAVE CONFIG (LOCALSTORAGE)
     function loadConfig() {
       let savedConfig = JSON.parse(localStorage.getItem('wedding_config')) || defaultConfig;
-      
+
       // Sinkronisasi form input
       document.getElementById('script-url').value = savedConfig.scriptUrl || "";
       document.getElementById('bride-name').value = savedConfig.brideName || "";
@@ -697,7 +842,110 @@
       document.getElementById('music-url').value = savedConfig.musicUrl || "";
       document.getElementById('wa-template').value = savedConfig.waTemplate || "";
 
+      // Memuat foto pengantin jika ada
+      if (savedConfig.bridePhoto) {
+        document.getElementById('bride-photo-preview').src = savedConfig.bridePhoto;
+      }
+      if (savedConfig.groomPhoto) {
+        document.getElementById('groom-photo-preview').src = savedConfig.groomPhoto;
+      }
+
+      // Memuat warna tema
+      let primary = savedConfig.themePrimary || "#2c4a3e";
+      let secondary = savedConfig.themeSecondary || "#d4af37";
+      applyColors(primary, secondary);
+
       checkAlertStatus(savedConfig.scriptUrl);
+    }
+
+    // Fungsi menerapkan warna tema ke element CSS Variable
+    function applyColors(primary, secondary) {
+      document.documentElement.style.setProperty('--primary-color', primary);
+      document.documentElement.style.setProperty('--secondary-color', secondary);
+
+      document.getElementById('primary-color-picker').value = primary;
+      document.getElementById('primary-color-hex').value = primary;
+      document.getElementById('secondary-color-picker').value = secondary;
+      document.getElementById('secondary-color-hex').value = secondary;
+    }
+
+    // Pilihan Preset Warna diklik
+    function applyPresetTheme(primary, secondary) {
+      applyColors(primary, secondary);
+      saveConfig();
+    }
+
+    // Pilihan Custom Color Picker berubah
+    function customColorChanged() {
+      let primary = document.getElementById('primary-color-picker').value;
+      let secondary = document.getElementById('secondary-color-picker').value;
+
+      document.getElementById('primary-color-hex').value = primary;
+      document.getElementById('secondary-color-hex').value = secondary;
+
+      document.documentElement.style.setProperty('--primary-color', primary);
+      document.documentElement.style.setProperty('--secondary-color', secondary);
+
+      saveConfig();
+    }
+
+    // Pilihan Input Hex Manual berubah
+    function hexInputChanged(type) {
+      let primary = document.getElementById('primary-color-hex').value.trim();
+      let secondary = document.getElementById('secondary-color-hex').value.trim();
+
+      if (!primary.startsWith('#')) primary = '#' + primary;
+      if (!secondary.startsWith('#')) secondary = '#' + secondary;
+
+      applyColors(primary, secondary);
+      saveConfig();
+    }
+
+    // Fungsi kompresi dan upload foto
+    function handlePhotoUpload(input, type) {
+      const file = input.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        alert('File yang dipilih harus berupa gambar!');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          const max_size = 200; // Resolusi 200px cukup untuk avatar bulat agar hemat kuota localStorage
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > max_size) {
+              height *= max_size / width;
+              width = max_size;
+            }
+          } else {
+            if (height > max_size) {
+              width *= max_size / height;
+              height = max_size;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Kompresi kualitas gambar (jpeg 0.75)
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+          document.getElementById(type + '-photo-preview').src = dataUrl;
+
+          saveConfig();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
 
     function saveConfig() {
@@ -715,9 +963,13 @@
         eventAddress: document.getElementById('event-address').value.trim(),
         mapsUrl: document.getElementById('maps-url').value.trim(),
         musicUrl: document.getElementById('music-url').value.trim(),
-        waTemplate: document.getElementById('wa-template').value
+        waTemplate: document.getElementById('wa-template').value,
+        themePrimary: document.getElementById('primary-color-hex').value.trim(),
+        themeSecondary: document.getElementById('secondary-color-hex').value.trim(),
+        bridePhoto: document.getElementById('bride-photo-preview').src,
+        groomPhoto: document.getElementById('groom-photo-preview').src
       };
-      
+
       localStorage.setItem('wedding_config', JSON.stringify(config));
       checkAlertStatus(config.scriptUrl);
     }
@@ -741,7 +993,7 @@
       try {
         const response = await fetch(`${savedConfig.scriptUrl}?action=getDashboardData`);
         const result = await response.json();
-        
+
         if (result.status === "success") {
           // Sync tamu, RSVP, dan Wishes dari Google Sheet
           if (result.data.guests && result.data.guests.length > 0) {
@@ -751,7 +1003,7 @@
           }
           rsvpDatabase = result.data.rsvps || [];
           wishesDatabase = result.data.wishes || [];
-          
+
           renderGuests();
           renderRSVPsAndWishes();
         }
@@ -764,10 +1016,10 @@
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.view-content').forEach(view => view.classList.remove('active'));
-      
+
       event.currentTarget.classList.add('active');
       document.getElementById('view-' + tabId).classList.add('active');
-      
+
       // Auto fetch jika tab RSVP dibuka
       if (tabId === 'rsvp' || tabId === 'share') {
         fetchDatabase();
@@ -777,10 +1029,10 @@
     // 5. MEMBUAT UNDANGAN TAMU BARU
     function addGuest(e) {
       e.preventDefault();
-      
+
       let name = document.getElementById('guest-name').value.trim();
       let phone = document.getElementById('guest-phone').value.trim();
-      
+
       // Standarisasi format nomor HP (ke 62...)
       if (phone.startsWith('0')) {
         phone = '62' + phone.substring(1);
@@ -805,7 +1057,7 @@
 
       guestDatabase.push(newGuest);
       localStorage.setItem('wedding_guests', JSON.stringify(guestDatabase));
-      
+
       document.getElementById('guest-form').reset();
       renderGuests();
 
@@ -885,7 +1137,7 @@
             const d = new Date(timeStr);
             if (isNaN(d.getTime())) return timeStr;
             return d.toLocaleString('id-ID', { hour12: false });
-          } catch(e) {
+          } catch (e) {
             return timeStr;
           }
         };
@@ -966,7 +1218,7 @@
       // Render Wishes
       const wishesBody = document.getElementById('wishes-list-body');
       wishesBody.innerHTML = '';
-      
+
       document.getElementById('count-wishes').innerText = wishesDatabase.length;
 
       if (wishesDatabase.length === 0) {
@@ -985,4 +1237,5 @@
     }
   </script>
 </body>
+
 </html>
